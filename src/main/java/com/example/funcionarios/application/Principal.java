@@ -1,8 +1,5 @@
 package com.example.funcionarios.application;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.example.funcionarios.domain.model.Funcionario;
@@ -15,5 +12,7 @@ public class Principal {
         // 3.2 – Remover o funcionário “João” da lista.
         funcionarioService.removerFuncionario(funcionarios, "João");
 
+        // 3.3 – Imprimir todos os funcionários com todas suas informações.
+        funcionarioService.imprimirFuncionario(funcionarios);
     }
 }
