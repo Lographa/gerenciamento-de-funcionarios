@@ -2,8 +2,8 @@ package com.example.funcionarios.application;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import com.example.funcionarios.domain.model.Funcionario;
 
@@ -31,6 +31,11 @@ public class FuncionarioService {
         }
 
         return funcionarios;
+    }
+
+    public void agruparFuncionarios(List<Funcionario> funcionarios) {
+        Map<String, List<Funcionario>> funcionariosFuncaoMap = funcionarios.stream()
+                .collect(Collectors.groupingBy(Funcionario::getFuncao));
     }
 
     public List<Funcionario> criarFuncionarios() {

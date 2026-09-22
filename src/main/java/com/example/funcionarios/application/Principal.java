@@ -20,5 +20,9 @@ public class Principal {
         List<Funcionario> funcionariosAtualizados = funcionarioService.atualizarSalario(funcionarios);
         funcionarioService.imprimirFuncionario(funcionariosAtualizados);
 
+        // 3.5 – Agrupar os funcionários por função em um MAP, sendo a chave a “função”
+        // e o valor a “lista de funcionários”.
+        funcionarioService.agruparFuncionarios(funcionarios);
+
     }
 }
