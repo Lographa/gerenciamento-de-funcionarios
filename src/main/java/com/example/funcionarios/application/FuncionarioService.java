@@ -59,7 +59,7 @@ public class FuncionarioService {
     public void imprimirFuncionarioBirthdayBetweenDates(List<Funcionario> funcionarios) {
         funcionarios.stream().filter(funcionario -> {
             int mes = funcionario.getDataNascimento().getMonthValue();
-            return mes >= 10 && mes <= 12;
+            return mes == 10 || mes == 12;
         }).forEach((funcionario) -> System.out.println(funcionario.getNome()));
     }
 
