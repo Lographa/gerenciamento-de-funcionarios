@@ -1,6 +1,5 @@
 package com.example.funcionarios.application;
 
-import java.time.LocalDate;
 import java.util.*;
 
 import com.example.funcionarios.domain.model.Funcionario;
