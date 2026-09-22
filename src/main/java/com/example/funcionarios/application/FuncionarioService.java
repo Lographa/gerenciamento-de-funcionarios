@@ -2,6 +2,7 @@ package com.example.funcionarios.application;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -24,18 +25,52 @@ public class FuncionarioService {
     }
 
     public List<Funcionario> atualizarSalario(List<Funcionario> funcionarios) {
+        BigDecimal percentual = new BigDecimal("0.10");
         for (Funcionario funcionario : funcionarios) {
-            BigDecimal percentual = new BigDecimal("0.10");
+
             BigDecimal aumento = funcionario.getSalario().multiply(percentual);
-            funcionario.setSalario(aumento);
+
+            BigDecimal novoSalario = funcionario.getSalario().add(aumento);
+            funcionario.setSalario(novoSalario);
         }
 
         return funcionarios;
     }
 
-    public void agruparFuncionarios(List<Funcionario> funcionarios) {
+    public Map<String, List<Funcionario>> agruparFuncionarios(List<Funcionario> funcionarios) {
         Map<String, List<Funcionario>> funcionariosFuncaoMap = funcionarios.stream()
                 .collect(Collectors.groupingBy(Funcionario::getFuncao));
+        return funcionariosFuncaoMap;
+    }
+
+    public void imprimirFuncionariosAgrupados(Map<String, List<Funcionario>> funcionariosFuncaoMap) {
+        funcionariosFuncaoMap.forEach((funcao, lista) -> {
+            System.out.println("Função: " + funcao);
+            lista.forEach((e) -> {
+                String formattedDate = UtilsFormatter.formatDate(e.getDataNascimento());
+                String formattedSalary = UtilsFormatter.formatSalary(e.getSalario());
+                System.out
+                        .println(e.getNome() + " - " + formattedSalary + " - " + formattedDate);
+            });
+        });
+    }
+
+    public void imprimirFuncionarioBirthdayBetweenDates(List<Funcionario> funcionarios) {
+        funcionarios.stream().filter(funcionario -> {
+            int mes = funcionario.getDataNascimento().getMonthValue();
+            return mes >= 10 && mes <= 12;
+        }).forEach((funcionario) -> System.out.println(funcionario.getNome()));
+    }
+
+    public void imprimirFuncionarioMaiorIdade(List<Funcionario> funcionarios) {
+        Funcionario maisVelho = funcionarios.stream().min(Comparator.comparing(Funcionario::getDataNascimento)).get();
+        long idade = ChronoUnit.YEARS.between(maisVelho.getDataNascimento(), LocalDate.now());
+        System.out.println("Funcionário mais velho: " + maisVelho.getNome() + " - " + idade + " anos");
+    }
+
+    public void funcionariosOrdemAlfabetica(List<Funcionario> funcionarios) {
+        funcionarios.stream().sorted(Comparator.comparing(Funcionario::getNome))
+                .forEach((funcionario) -> System.out.println(funcionario.getNome()));
     }
 
     public List<Funcionario> criarFuncionarios() {

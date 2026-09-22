@@ -1,6 +1,7 @@
 package com.example.funcionarios.application;
 
-import java.util.List;
+import java.time.LocalDate;
+import java.util.*;
 
 import com.example.funcionarios.domain.model.Funcionario;
 
@@ -22,7 +23,20 @@ public class Principal {
 
         // 3.5 – Agrupar os funcionários por função em um MAP, sendo a chave a “função”
         // e o valor a “lista de funcionários”.
-        funcionarioService.agruparFuncionarios(funcionarios);
+        Map<String, List<Funcionario>> funcionariosAgrupados = funcionarioService.agruparFuncionarios(funcionarios);
+
+        // 3.6 – Imprimir os funcionários, agrupados por função.
+        funcionarioService.imprimirFuncionariosAgrupados(funcionariosAgrupados);
+
+        // 3.8 – Imprimir os funcionários que fazem aniversário no mês 10 e 12.
+        funcionarioService.imprimirFuncionarioBirthdayBetweenDates(funcionarios);
+
+        // 3.9 – Imprimir o funcionário com a maior idade, exibir os atributos: nome e
+        // idade.
+        funcionarioService.imprimirFuncionarioMaiorIdade(funcionarios);
+
+        // 3.10 – Imprimir a lista de funcionários por ordem alfabética.
+        funcionarioService.funcionariosOrdemAlfabetica(funcionarios);
 
     }
 }
