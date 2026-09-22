@@ -1,6 +1,7 @@
 package com.example.funcionarios.application;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -71,6 +72,21 @@ public class FuncionarioService {
     public void funcionariosOrdemAlfabetica(List<Funcionario> funcionarios) {
         funcionarios.stream().sorted(Comparator.comparing(Funcionario::getNome))
                 .forEach((funcionario) -> System.out.println(funcionario.getNome()));
+    }
+
+    public void imprimirTotalSalarios(List<Funcionario> funcionarios) {
+        BigDecimal total = funcionarios.stream().map(Funcionario::getSalario).reduce(BigDecimal.ZERO, BigDecimal::add);
+        String formattedSalary = UtilsFormatter.formatSalary(total);
+        System.out.println("Total dos salários: " + formattedSalary);
+    }
+
+    public void imprimirQuantosSalariosMinimos(List<Funcionario> funcionarios) {
+        BigDecimal salarioMinimo = new BigDecimal("1212.00");
+        funcionarios.stream().forEach((funcionario) -> {
+            BigDecimal salario = funcionario.getSalario();
+            int quantosSalariosMinimos = salario.divide(salarioMinimo, 0, RoundingMode.DOWN).intValue();
+            System.out.println(funcionario.getNome() + " - " + quantosSalariosMinimos + " salários mínimos");
+        });
     }
 
     public List<Funcionario> criarFuncionarios() {

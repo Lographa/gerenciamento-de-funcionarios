@@ -38,5 +38,11 @@ public class Principal {
         // 3.10 – Imprimir a lista de funcionários por ordem alfabética.
         funcionarioService.funcionariosOrdemAlfabetica(funcionarios);
 
+        // 3.11 – Imprimir o total dos salários dos funcionários.
+        funcionarioService.imprimirTotalSalarios(funcionarios);
+
+        // 3.12 – Imprimir quantos salários mínimos ganha cada funcionário, considerando
+        // que o salário mínimo é R$1212.00.
+        funcionarioService.imprimirQuantosSalariosMinimos(funcionarios);
     }
 }
