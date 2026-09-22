@@ -23,6 +23,16 @@ public class FuncionarioService {
         }
     }
 
+    public List<Funcionario> atualizarSalario(List<Funcionario> funcionarios) {
+        for (Funcionario funcionario : funcionarios) {
+            BigDecimal percentual = new BigDecimal("0.10");
+            BigDecimal aumento = funcionario.getSalario().multiply(percentual);
+            funcionario.setSalario(aumento);
+        }
+
+        return funcionarios;
+    }
+
     public List<Funcionario> criarFuncionarios() {
         return new ArrayList<>(List.of(
                 new Funcionario("Maria", LocalDate.of(2000, 10, 18), new BigDecimal("2009.44"), "Operador"),
