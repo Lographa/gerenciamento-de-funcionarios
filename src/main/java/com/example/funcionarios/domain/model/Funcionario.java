@@ -3,9 +3,11 @@ package com.example.funcionarios.domain.model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import lombok.Data;
+import lombok.*;
 
 @Data
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class Funcionario extends Pessoa {
     private BigDecimal salario;
     private String funcao;
@@ -15,4 +17,5 @@ public class Funcionario extends Pessoa {
         this.salario = salario;
         this.funcao = funcao;
     }
+
 }
